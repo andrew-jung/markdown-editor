@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+
+// TODO: Export these from /components?
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Main from "./components/Main";
+import useDarkMode from "./hooks/useDarkMode";
 
 function App() {
+  const { theme, toggleTheme } = useDarkMode();
+  const themeStyles =
+    theme === "light"
+      ? {
+          backgroundColor: "#eee",
+          color: "#000",
+        }
+      : {
+          backgroundColor: "#171616",
+          color: "#fff",
+        };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={themeStyles}>
+      <Header theme={theme} toggleTheme={toggleTheme} />
+      <Main theme={theme} />
+      <Footer />
     </div>
   );
 }
